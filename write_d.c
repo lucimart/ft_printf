@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:09:35 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 01:18:35 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ static int	write_d_aux(char *str_nbr, t_format *data)
 
 	ret = 0;
 	len = ft_strlen(str_nbr);
-	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;	
+	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;
 	data->width = data->width > data->prec ? (data->width - data->prec) : 0;
 	if (data->minus)
 	{

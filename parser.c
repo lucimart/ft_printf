@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:53:15 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 01:18:12 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int		parse_digit(t_format *data, va_list arg, int i, int is_prec)
 		{
 			data->width = va_arg(arg, int);
 			if (data->width < 0 && (data->minus = 1) && (data->width *= -1))
-				(data->zero = 0);	
+				(data->zero = 0);
 		}
 		i++;
 	}

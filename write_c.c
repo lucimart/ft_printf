@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:18:21 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 01:18:22 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	write_c(char c, t_format *data)
 	len = 1;
 	ret = 0;
 	data->prec = (data->prec_omit) ? 0 : data->prec;
-	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;	
+	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;
 	data->width = data->width > data->prec ? (data->width - data->prec) : 0;
 	if (data->minus)
 	{

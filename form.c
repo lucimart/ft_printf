@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:07:33 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 20:35:53 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 01:17:49 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,11 +63,10 @@ int		write_spaces(t_format *data, int len)
 			ret += write(1, " ", 1);
 	else if (!data->minus && !data->zero)
 		while (data->width-- > 0)
-			ret += write(1, " ", 1);		
-	else if (data->minus && data->width) // TODO && data->minus
+			ret += write(1, " ", 1);
+	else if (data->minus && data->width)
 		while (data->width-- > 0)
 			ret += write(1, " ", 1);
-
 	return (ret);
 }
 
@@ -88,6 +87,5 @@ int		write_zeroes(t_format *data, int len)
 	else if (data->width && !data->minus)
 		while (width-- > 0)
 			ret += write(1, "0", 1);
-	
 	return (ret);
 }
