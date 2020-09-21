@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:35:10 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/15 20:40:35 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 14:45:49 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,11 +29,11 @@ static int	write_u_aux(char *str_nbr, t_format *data)
 	if (data->minus)
 	{
 		ret += write(1, str_nbr, data->prec);
-		ret += write_width(data->width, data->prec, data->zero);
+		ret += write_spaces(data, len);
 	}
 	else
 	{
-		ret += write_width(data->width, data->prec, data->zero);
+		ret += write_spaces(data, len);
 		ret += write(1, str_nbr, data->prec);
 	}
 	return (ret);

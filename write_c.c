@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:18:21 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/15 20:51:26 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 14:44:47 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,11 @@ int	write_c(char c, t_format *data)
 	if (data->minus)
 	{
 		write(1, &c, 1);
-		ret = write_width(data->width, 1, 0);
+		ret = write_spaces(data, 1);
 	}
 	else
 	{
-		ret = write_width(data->width, 1, 0);
+		ret = write_spaces(data, 1);
 		write(1, &c, 1);
 	}
 	return (++ret);

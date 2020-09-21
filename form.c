@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:07:33 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/18 18:45:10 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 17:27:25 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,13 +49,44 @@ int		form(t_format *data, va_list arg)
 ** TODO left aligned?
 */
 
-int		write_width(int width, int minus, int zero)
+int		write_spaces(t_format *data, int len)
 {
 	int ret;
+	int width;
+	int prec;
 
+	width = data->width;
+	prec = data->prec;
 	ret = 0;
-	minus = 0;
-	while (width-- - minus)
-		ret += write(1, (zero ? "0" : " "), 1);
+	if (data->negNum)
+		prec--;
+	if (prec - len > 0)
+		while (prec-- > 0)
+			ret += write(1, " ", 1);
+	else if (data->width && data->minus)
+		while (width-- > 0)
+			ret += write(1, (data->zero ? "0" : " "), 1);
+
+	return (ret);
+}
+
+int		write_zeroes(t_format *data, int len)
+{
+	int ret;
+	int width;
+	int prec;
+
+	width = data->width;
+	prec = data->prec;
+	ret = 0;
+	if (data->negNum)
+		ret += write(1, "-", 1);
+	if (data->prec - len > 0)
+		while (prec-- - len > 0)
+			ret += write(1, "0", 1);
+	else if (data->width && !data->minus)
+		while (width-- > 0)
+			ret += write(1, (data->zero ? "0" : " "), 1);
+	
 	return (ret);
 }

@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:09:35 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/15 20:33:52 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 17:12:21 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,16 +24,18 @@ static int	write_d_aux(char *str_nbr, t_format *data)
 
 	ret = 0;
 	len = ft_strlen(str_nbr);
-	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;
+	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;	
 	data->width = data->width > data->prec ? (data->width - data->prec) : 0;
 	if (data->minus)
 	{
+		ret += write_zeroes(data, len);
 		ret += write(1, str_nbr, len);
-		ret += write_width(data->width, data->prec, data->zero);
+		ret += write_spaces(data, len);
 	}
 	else
 	{
-		ret += write_width(data->width, data->prec, data->zero);
+		ret += write_spaces(data, len);
+		ret += write_zeroes(data, len);
 		ret += write(1, str_nbr, len);
 	}
 	return (ret);
@@ -54,7 +56,7 @@ int			write_d(int nbr, t_format *data)
 	ret = 0;
 	if (nbr < 0 && data->zero)
 	{
-		ret += write(1, "-", 1);
+		data->negNum = 1;
 		nbr *= -1;
 		data->width--;
 	}

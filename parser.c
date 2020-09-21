@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:53:15 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/18 18:36:24 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 17:21:49 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,20 +24,17 @@ int		parse_digit(t_format *data, va_list arg, int i, int is_prec)
 	i += is_prec == 1 ? 1 : 0;
 	if (data->str[i] == '*')
 	{
-		if (is_prec)
-			data->prec = va_arg(arg, int);
+		if (is_prec && (data->prec = va_arg(arg, int)))
+			data->prec = (data->prec < 0) ? 0 : data->prec;
 		else
 		{
 			data->width = va_arg(arg, int);
-			if (data->width < 0 && (data->minus = 1))
-			{
-				data->zero = 0;
-				data->width *= -1;
-			}
+			if (data->width < 0 && (data->minus = 1) && (data->width *= -1))
+				(data->zero = 0);	
 		}
 		i++;
 	}
-	else
+	else if (ft_strchr("0123456789", data->str[i]))
 		while (ft_strchr("0123456789", data->str[i]))
 		{
 			if (is_prec)
@@ -45,6 +42,8 @@ int		parse_digit(t_format *data, va_list arg, int i, int is_prec)
 			else
 				data->width = (data->width * 10) + (data->str[i++] - '0');
 		}
+	else if (is_prec)
+		data->zero = 0;
 	return (--i);
 }
 
