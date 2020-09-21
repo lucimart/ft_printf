@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 02:38:52 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 16:16:08 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 19:05:51 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct	s_format
 {
 	char		*str;
-	int			negNum;
+	int			neg_nbr;
 
 	char		type;
 	int			minus;

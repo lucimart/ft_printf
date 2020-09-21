@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:07:33 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 17:27:25 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 20:35:53 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,20 +52,21 @@ int		form(t_format *data, va_list arg)
 int		write_spaces(t_format *data, int len)
 {
 	int ret;
-	int width;
 	int prec;
 
-	width = data->width;
 	prec = data->prec;
 	ret = 0;
-	if (data->negNum)
+	if (data->neg_nbr)
 		prec--;
-	if (prec - len > 0)
+	if (prec - len > 0 && data->width && !data->minus)
 		while (prec-- > 0)
 			ret += write(1, " ", 1);
-	else if (data->width && data->minus)
-		while (width-- > 0)
-			ret += write(1, (data->zero ? "0" : " "), 1);
+	else if (!data->minus && !data->zero)
+		while (data->width-- > 0)
+			ret += write(1, " ", 1);		
+	else if (data->minus && data->width) // TODO && data->minus
+		while (data->width-- > 0)
+			ret += write(1, " ", 1);
 
 	return (ret);
 }
@@ -79,14 +80,14 @@ int		write_zeroes(t_format *data, int len)
 	width = data->width;
 	prec = data->prec;
 	ret = 0;
-	if (data->negNum)
+	if (data->neg_nbr)
 		ret += write(1, "-", 1);
 	if (data->prec - len > 0)
 		while (prec-- - len > 0)
 			ret += write(1, "0", 1);
 	else if (data->width && !data->minus)
 		while (width-- > 0)
-			ret += write(1, (data->zero ? "0" : " "), 1);
+			ret += write(1, "0", 1);
 	
 	return (ret);
 }
