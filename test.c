@@ -6,12 +6,12 @@ int main()
 {
 	int x;
 	int y;
-	char *str = "%5d|%%|\n";
+	char *str = "%10.*s|%%|\n";
 
 
 	printf("test format:%s\n", str);
-	x = ft_printf(str, -42);
-	y = printf(str, -42);
+	x = ft_printf(str, NULL, -5);
+	y = printf(str, NULL, -5);
 	printf("\nft_printf:%d\n", x);
 	printf("printf:%d\n", y);
 	if (x != y)

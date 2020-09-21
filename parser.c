@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:53:15 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 17:21:49 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int		parse_digit(t_format *data, va_list arg, int i, int is_prec)
 	if (data->str[i] == '*')
 	{
 		if (is_prec && (data->prec = va_arg(arg, int)))
-			data->prec = (data->prec < 0) ? 0 : data->prec;
+			data->prec_omit = (data->prec < 0) ? 1 : 0;
 		else
 		{
 			data->width = va_arg(arg, int);
@@ -65,7 +65,7 @@ int		parser(t_format *data, va_list arg, int i)
 		else if (ft_strchr("0123456789*", data->str[i]) && !data->width
 			&& !data->prec)
 			i = parse_digit(data, arg, i, 0);
-		else if (data->str[i] == '.' && !data->prec)
+		else if (data->str[i] == '.' && !data->prec && (data->dot = 1))
 			i = parse_digit(data, arg, i, 1);
 		else if (in_set(data->str[i], "cspdiuxX%"))
 		{

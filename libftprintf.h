@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 02:38:52 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 19:05:51 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:57:05 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,13 @@ typedef struct	s_format
 	char		*str;
 	int			neg_nbr;
 
+	int			dot;
 	char		type;
 	int			minus;
 	int			zero;
 	int			width;
 	int			prec;
+	int			prec_omit;
 }				t_format;
 
 int				ft_printf(const char *format, ...);

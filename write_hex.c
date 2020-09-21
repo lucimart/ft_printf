@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:41:22 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 20:49:49 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int				write_x(unsigned int nbr, t_format *data, int uppercase)
 	int		ret;
 
 	ret = 0;
+	data->prec = (data->prec_omit) ? 0 : data->prec;
 	str = ft_umaxtoa((uintmax_t)nbr, 16, uppercase);
 	ret += write_x_aux(str, data);
 	free(str);

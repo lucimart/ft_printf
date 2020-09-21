@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:35:10 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 20:42:01 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,7 @@ int			write_u(unsigned int nbr, t_format *data)
 	int		ret;
 
 	ret = 0;
+	data->prec = (data->prec_omit) ? 0 : data->prec;
 	str_nbr = ft_maxtoa((intmax_t)nbr, 10, 0);
 	ret += write_u_aux(str_nbr, data);
 	free(str_nbr);

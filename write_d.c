@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:09:35 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 19:23:37 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,6 +54,7 @@ int			write_d(int nbr, t_format *data)
 	int		ret;
 
 	ret = 0;
+	data->prec = (data->prec_omit) ? 0 : data->prec;
 	if (nbr < 0 && (data->zero || (data->prec - ft_strlen(ft_itoa(nbr)) > 0) ||
 		data->width > 0))
 	{
