@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:37:05 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/21 14:45:30 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/21 21:17:37 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,24 @@ int	write_p(unsigned long long nbr, t_format *data)
 	int		ret;
 	int		len;
 
-	ret = write(1, "0x", 2);
-	str = ft_umaxtoa(nbr, 16, 0);
-	len = ft_strlen(str);
+	ret = 0;
+	str = (nbr != 0) ? ft_strdup("0x") : ft_strdup("(nil)");
+	len = (nbr != 0) ? ft_strlen(ft_umaxtoa(nbr, 16, 0)) + 3 : 5;
+	if (nbr != 0)
+		ft_strlcat(str, ft_umaxtoa(nbr, 16, 0), len--);
 	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;
 	data->width = data->width > data->prec ? (data->width - data->prec) : 0;
 	if (data->minus)
 	{
-		ret += write(1, str, data->prec);
+		ret += write_zeroes(data, len);
+		ret += write(1, str, len);
 		ret += write_spaces(data, len);
 	}
 	else
 	{
 		ret += write_spaces(data, len);
-		ret += write(1, str, data->prec);
+		ret += write_zeroes(data, len);
+		ret += write(1, str, len);
 	}
 	free(str);
 	return (ret);
