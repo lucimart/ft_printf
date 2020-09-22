@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 01:33:32 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 01:00:17 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 02:39:37 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	reset_flags(t_format *data)
 	data->prec = 0;
 	data->prec_omit = 0;
 	data->dot = 0;
+	data->neg_nbr = 0;
 }
 
 /*

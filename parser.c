@@ -6,11 +6,23 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 17:53:15 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 01:18:12 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 21:59:44 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libftprintf.h"
+
+int		parse_digit_aux(t_format *data, int is_prec, int i)
+{
+	while (ft_strchr("0123456789", data->str[i]))
+	{
+		if (is_prec)
+			data->prec = (data->prec * 10) + (data->str[i++] - '0');
+		else
+			data->width = (data->width * 10) + (data->str[i++] - '0');
+	}
+	return (i);
+}
 
 /*
 ** Receives the format struct, arg list, index position of data->str
@@ -24,8 +36,11 @@ int		parse_digit(t_format *data, va_list arg, int i, int is_prec)
 	i += is_prec == 1 ? 1 : 0;
 	if (data->str[i] == '*')
 	{
-		if (is_prec && (data->prec = va_arg(arg, int)))
+		if (is_prec)
+		{
+			data->prec = va_arg(arg, int);
 			data->prec_omit = (data->prec < 0) ? 1 : 0;
+		}
 		else
 		{
 			data->width = va_arg(arg, int);
@@ -35,15 +50,12 @@ int		parse_digit(t_format *data, va_list arg, int i, int is_prec)
 		i++;
 	}
 	else if (ft_strchr("0123456789", data->str[i]))
-		while (ft_strchr("0123456789", data->str[i]))
-		{
-			if (is_prec)
-				data->prec = (data->prec * 10) + (data->str[i++] - '0');
-			else
-				data->width = (data->width * 10) + (data->str[i++] - '0');
-		}
+		i = parse_digit_aux(data, is_prec, i);
 	else if (is_prec)
+	{
+		data->prec_omit = 1;
 		data->zero = 0;
+	}
 	return (--i);
 }
 
@@ -70,6 +82,8 @@ int		parser(t_format *data, va_list arg, int i)
 		else if (in_set(data->str[i], "cspdiuxX%"))
 		{
 			data->type = ft_strchr("cspdiuxX%", data->str[i])[0];
+			if (!data->dot)
+				data->prec_omit = 1;
 			break ;
 		}
 	}

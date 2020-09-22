@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 18:28:30 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 01:13:47 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 16:54:40 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,13 +23,14 @@ int	write_s(char *str, t_format *data)
 
 	if (!str)
 		str = ft_strdup("(null)");
+	str = (data->dot && (data->prec == 0)) ? ft_strdup("") : str;
 	ret = 0;
 	len = ft_strlen(str);
 	data->prec = (data->prec_omit) ? len : data->prec;
 	data->prec = (data->dot) ? data->prec : len;
 	data->prec = (data->prec >= 0 && data->prec < len) ? data->prec : len;
-	data->prec = (ft_strequ(str, "(null)") && data->dot && !data->prec_omit) ?
-		0 : data->prec;
+	data->width = ((data->dot && (data->prec == 0)) &&
+		!data->prec_omit && !data->width) ? 0 : data->width;
 	data->width = data->width > data->prec ? (data->width - data->prec) : 0;
 	if (data->minus)
 	{

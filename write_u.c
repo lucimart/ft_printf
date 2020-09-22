@@ -6,7 +6,7 @@
 /*   By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/09/15 20:35:10 by lucimart          #+#    #+#             */
-/*   Updated: 2020/09/22 00:53:55 by lucimart         ###   ########.fr       */
+/*   Updated: 2020/09/22 20:03:01 by lucimart         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ static int	write_u_aux(char *str_nbr, t_format *data)
 
 	ret = 0;
 	len = ft_strlen(str_nbr);
-	data->prec = (data->prec >= 0 && data->prec < len) ? len : data->prec;
+	data->prec = ((data->prec >= 0 && data->prec < len) || data->prec_omit) ?
+		len : data->prec;
 	data->width = data->width > data->prec ? (data->width - data->prec) : 0;
 	if (data->minus)
 	{
@@ -52,8 +53,8 @@ int			write_u(unsigned int nbr, t_format *data)
 	int		ret;
 
 	ret = 0;
-	data->prec = (data->prec_omit) ? 0 : data->prec;
-	str_nbr = ft_maxtoa((intmax_t)nbr, 10, 0);
+	str_nbr = (data->dot && (data->prec == 0) && (nbr == 0)) ?
+		ft_strdup("") : ft_maxtoa((intmax_t)nbr, 10, 0);
 	ret += write_u_aux(str_nbr, data);
 	free(str_nbr);
 	return (ret);

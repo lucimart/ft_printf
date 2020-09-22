@@ -6,7 +6,7 @@
 #    By: lucimart <lucimart@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2020/02/24 23:50:14 by lucimart          #+#    #+#              #
-#    Updated: 2020/09/18 19:01:57 by lucimart         ###   ########.fr        #
+#    Updated: 2020/09/22 21:12:52 by lucimart         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -80,8 +80,7 @@ PRINTF_O =		ft_printf.o \
 				write_p.o \
 				write_d.o \
 				write_u.o \
-				write_hex.o \
-				write_mod.o
+				write_hex.o
 
 OBJ =			$(LIBFT_O) $(PRINTF_O)
 
